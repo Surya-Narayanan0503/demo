@@ -1,5 +1,5 @@
-# This repo will hold my work in class
-## Graduate Level Advanced Web Programming - Spring 2022
+# This repo will hold my work in Home
+## Graduate Level Advanced Web Programming - Fall 2022
 
 - HTML
 - CSS

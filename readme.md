@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # About
 
 ![alt text](PhotoCollage_20211121_144308751.jpg)
@@ -14,3 +15,15 @@ Hi Professor, myself Surya Narayanan Murugaiyan Ragupathy from Tamil Nadu, India
 # Course Objective
 
 Immediately, upon completing this course, "Advanced Web Server Program", I aspire to become an expert in full-stack development that will help me to achieve a software developer role in a reputed company. In the long time run, I wish to be an entrepreneur starting my own web development company that develops websites and e-products and contributes to society in their daily chores.
+=======
+# This repo will hold my work in Home
+## Graduate Level Advanced Web Programming - Fall 2021
+
+- HTML
+- CSS
+- Bulma
+- Vue 3
+- NodeJS
+- Express
+- CI/CD
+>>>>>>> 323094aedfa1ad524dc8b0e21e692bd847923d6e

@@ -155,24 +155,24 @@
                           </span>
                         </p>
                       </div>
-                      <a class="panel-block">
-                          <input type="checkbox" checked />
+                      <a class="panel-block panel1">
+                          <input type="checkbox" class="checkbox1" onclick="SlideUp1();">
                           Make Bulma great again
                       </a>
-                      <a class="panel-block">
-                          <input type="checkbox">
+                      <a class="panel-block panel2">
+                          <input type="checkbox" class="checkbox2" onclick="SlideUp2();">
                           Add some more features
                       </a>
-                      <a class="panel-block">
-                          <input type="checkbox">
+                      <a class="panel-block panel3">
+                          <input type="checkbox" class="checkbox3" onclick="SlideUp3();">
                           Make a github account
                       </a>
-                      <a class="panel-block">
-                          <input type="checkbox">
+                      <a class="panel-block panel4">
+                          <input type="checkbox" class="checkbox4" onclick="SlideUp4();">
                           Learn how to use github
                       </a>
-                      <a class="panel-block">
-                          <input type="checkbox">
+                      <a class="panel-block panel5">
+                          <input type="checkbox" class="checkbox5" onclick="SlideUp5();">
                           add a .gitignore file
                       </a>
                     </article>
@@ -224,22 +224,56 @@
     </div>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>
     <script>
-       $(".fas,.fab")
-       .css({
-        //  "color" : "orange"
-       })
-       .animate({
-        //  "font-size" : 50
-       }); 
-       $(".tabs is-boxed a").click(function(){
-         $("tabs is-boxed a").removeClass("is-active");
-         $(this).addClass("is-active");
+       function showContents() {
+            $(".panel-block").show();
+          }
+        
+          $(".tabs li").click(function(){
+            $(".tabs li.is-active").removeClass("is-active");
+            $(this).addClass("is-active");
+            
+            if($(this).text().trim() == "Current"){
+              showContents();
+              $(":checked").closest(".panel-block").hide();
+            }
+            else if($(this).text().trim() == "Completed") {
+              showContents();
+              $("input:not(:checked)").closest(".panel-block").hide();
+            }
+            else if($(this).text().trim() == "Upcoming") {
+              showContents();
+              $(":checked").closest(".panel-block").hide();
+            }
+            else {
+              showContents();
+            }
+            });
+           function SlideUp1() {
+            //  console.log("check1");
+             $('.panel1').slideUp();
+           }
 
-       });
+           function SlideUp2() {
+            //  console.log("check2");
+             $('.panel2').slideUp();
+           }
 
-       function capitalize(s){
-         return s && s[0].toupperCase() + s.slice(1);
-       }
-    </script>
+           function SlideUp3() {
+            //  console.log("check3");
+             $('.panel3').slideUp();
+           }
+
+           function SlideUp4() {
+            //  console.log("check4");
+             $('.panel4').slideUp();
+           }
+
+           function SlideUp5() {
+            //  console.log("check5");
+             $('.panel5').slideUp();
+           }
+          </script>   
+
+          
 </body>
 </html>

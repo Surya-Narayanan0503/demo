@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { RouterLink } from "vue-router";
 
 
 const isOpen = ref(false);
@@ -21,9 +22,9 @@ const isOpen = ref(false);
       
         <div class="navbar-menu" :class="{'is-active' :isOpen }">
           <div class="navbar-start">
-            <a class="navbar-item" href="https://bulma.io/">
+            <router-link class="navbar-item" to="/">
               Home
-            </a>
+            </router-link >
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
                 Docs

@@ -1,38 +1,37 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted } from 'vue';
 
-            const message = ref('Hello Vue!' );
-            const currentTab =  ref('All');
-            const prompt =  ref('Waiting for input.....');
-            const notifications = reactive( [
-                {type: 'primary', message : 'This is a primary notification' },
-                {type: 'link', message : 'This is a link notification' },
-                {type: 'success', message : 'This is a success notification' },
-                {type: 'warning', message : 'This is a warning notification' },
-                {type: 'danger', message : 'This is a danger notification' },
-            ] );
 
-       
-            function cardClick(){
-                message.value = 'You CLicked the card!';
-            }
-            function close(index: number){
-            notifications.splice(index,1);
-        }
-      
-        onMounted(() => {
-            setInterval(() => {
-                prompt.value += '.';
-            }, 500);
-        });
+    const message = ref( 'Hello Vue!' );
+    const currentTab = ref( 'All' );
+    const prompt = ref( 'Waiting for input...' );
+    const notifications = reactive( [
+        { type: 'primary', message: 'This is a primary notification' },
+        { type: 'link', message: 'This is a link notification' },
+        { type: 'success', message: 'Yay you did it!' },
+        { type: 'warning', message: 'Uh Oh! Watch out!' },
+        { type: 'danger', message: 'I cant believe you just did that!' },
+    ] );
+
+
+    function cardClick() {
+        message.value = 'You clicked the card!';
+    }
+    function close(index: number) {
+        notifications.splice(index, 1);
+    }
+                
+    onMounted(() => {
+        setInterval(() => {
+            prompt.value += '.';
+        }, 500);
+    });
+
 
 </script>
 
 <template>
-      <div class="container" >
-
-
-            <div class="">
+                <div class="">
                 <div class="columns">
 
                     <div class="column is-one-quarter">
@@ -77,7 +76,7 @@ import { ref, reactive, onMounted } from "vue";
                         <h2 class="subtitle">Some examples of using Bulma</h2> 
 
 
-                        <div class="card">
+                        <div class="card" @click="cardClick"  >
                             <div class="card-image">
                               <figure class="image is-4by3">
                                 <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -97,9 +96,10 @@ import { ref, reactive, onMounted } from "vue";
                                 </div>
                               </div>
                           
-                              <div class="content" @click="cardClick()">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                              <div class="content">
+                                {{ message }} 
+                                <br />
+                                <a>@bulmaio</a>.
                                 <a href="#">#css</a> <a href="#">#responsive</a>
                                 <br>
                                 <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
@@ -107,26 +107,9 @@ import { ref, reactive, onMounted } from "vue";
                             </div>
                           </div>
 
-                        <div class="notification is-primary">
-                            <button class="delete"></button>
-                            This is a primary alert—check it out!
-                        </div>
-
-                        <div class="notification is-link">
-                            <button class="delete"></button>
-                            This is a primary alert—check it out!
-                        </div>
-                        <div class="notification is-success">
-                            <button class="delete"></button>
-                            This is a primary alert—check it out!
-                        </div>
-                        <div class="notification is-warning">
-                            <button class="delete"></button>
-                            This is a primary alert—check it out!
-                        </div>
-                        <div class="notification is-danger">
-                            <button class="delete"></button>
-                            This is a primary alert—check it out!
+                        <div v-for=" (x, i) in notifications" :class="`notification is-${x.type}`">
+                            <button class="delete" @click="close(i)" ></button>
+                            {{ x.message }}
                         </div>
                         
                     </div>
@@ -138,15 +121,15 @@ import { ref, reactive, onMounted } from "vue";
                               Primary
                             </p>
                             <p class="panel-tabs">
-                              <a class="is-active">All</a>
-                              <a>Public</a>
-                              <a>Private</a>
-                              <a>Sources</a>
-                              <a>Forks</a>
+                              <a :class="{ 'is-active': currentTab == 'All' }" @click=" currentTab = 'All' " >All</a>
+                              <a :class="{ 'is-active': currentTab == 'Public' }" @click=" currentTab = 'Public' " >Public</a>
+                              <a :class="{ 'is-active': currentTab == 'Private' }" @click=" currentTab = 'Private' " >Private</a>
+                              <a :class="{ 'is-active': currentTab == 'Sources' }" @click=" currentTab = 'Sources' " >Sources</a>
+                              <a :class="{ 'is-active': currentTab == 'Forks' }" @click=" currentTab = 'Forks' " >Forks</a>
                             </p>
                             <div class="panel-block">
                               <p class="control has-icons-left">
-                                <input class="input is-primary" type="text" placeholder="Search">
+                                <input class="input is-primary" type="text" :placeholder="prompt">
                                 <span class="icon is-left">
                                   <i class="fas fa-search" aria-hidden="true"></i>
                                 </span>
@@ -180,13 +163,14 @@ import { ref, reactive, onMounted } from "vue";
                     </div>
                 </div>
             </div>
-      </div>
+  
 </template>
 
 <style>
- .card .delete {
-                position: absolute;
-                right: 0.5rem;
-                top: 0.5rem;
-            }
+        .card .delete {
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
+        }
+
 </style>

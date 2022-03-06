@@ -1,21 +1,20 @@
-import { createRouter, createWebHistory, RouteRecord, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-// import Messages from '../pages/Messages.vue';
 import Home from '../pages/Home.vue';
+//import Messages from '../pages/Messages.vue';
 import Generic from '../pages/Generic.vue';
 import Login from '../pages/Login.vue';
-import session from "../../models/session";
-
+import session from "../models/session";
 
 // 2. Define some routes
 // Each route should map to a component.
 // We'll talk about nested routes later.
 const routes: RouteRecordRaw[] = [
   { path: '/', component: Home },
-  { path: '/about', component: Generic, props: {title: 'Abut Page!'} },
-  { path: '/contact', component: Generic, props: {title: 'Contact Page!'} },
+  { path: '/about', component: Generic, props: { title: 'About Page!' } },
+  { path: '/contact', component: Generic, props: { title: 'Contact Page!' } },
   { path: '/login', component: Login },
-  { path: '/signup', component: Generic, props: {title: 'SIgnUp Page!'} },
+  { path: '/signup', component: Generic, props: { title: 'Signup Page!' } },
   { path: '/messages', component: () => import('../pages/Messages.vue') },
 ]
 
@@ -29,13 +28,11 @@ const router = createRouter({
   linkActiveClass: 'is-active',
 })
 
-router.beforeEach((to,from) =>{
-    if(['/messages'].includes(to.path))  { 
-        if(!session.user){
+router.beforeEach((to, from) => {
+    if (['/messages'].includes(to.path)) { // list of paths that require login
+        if (!session.user) {
             return '/login';
-
         }
-
     }
 })
 

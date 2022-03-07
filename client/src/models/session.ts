@@ -1,12 +1,25 @@
-import router from "../router"
+import router from "../router";
+import * as users from "../models/user";
+import { reactive } from "vue";
+const session = reactive({
+    user: null as users.User | null,
+});
 
-const session = {
-    user: null as any,
+export async function Login(handle: string, password: string){
+    const user = users.list.find(u => u.handle === handle);
+
+    if(!user){
+        throw {message: "User not found" };
+    }
+    if(user.password !== password){
+        throw {message: "Incorrect password" };
+    }
+    session.user = user;
+    router.push('/messages');
 }
 
-export async function Login(username: string, password: string){
-    session.user ={username : password};
-    router.push('/messages');
+export function Logout(){
+    session.user = null;
 }
 
 export default session;

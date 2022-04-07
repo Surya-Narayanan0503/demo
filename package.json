@@ -14,7 +14,8 @@
     "url": "git+https://github.com/Surya-Narayanan0503/demo.git"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "dotenv" : "^16.0.0"
   },
   "author": "",
   "license": "ISC",

@@ -1,22 +1,19 @@
+require('dotenv').config();
 const express = require('express')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
+
+console.log(process.env);
 
 app
   .get('/', (req, res) => {
     res.send('You are on the Homepage')
   })
-  .get('/about', (req,res) => {
-    res.send('You are on the about page')
+  .get('/api/', (req,res) => {
+    res.send('You are at the root of API. FOr the best class ever - ' + process.env.BEST_CLASS_EVER')
   })
-  .get('/contact', (req,res) => {
-    res.send({
-      email: 'narayans4@newpaltz.edu',
-      phone: '123-456-7890',
-      twitter: '@budweiser',
-      instagram:'@abcdef'  })
-  })
+  .use('/api/users', usersController)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

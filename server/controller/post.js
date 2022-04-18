@@ -3,37 +3,47 @@
 const express = require('express');
 const app = express.Router();
 
-const userModel = require('../models/user');
+const postModel = require('../models/post');
 
 const CREATED_STATUS = 201;
 
 app
-    .get('/', (req, res) => {
-        res.send(userModel.list);
+    .get('/', (req, res, next) => {
+        postModel.getList()
+            .then(posts => res.json({ success: true, errors: [], data: posts }))
+            .catch(next);
     })
-    .get('/:id', (req, res) => {
-
-        const user = userModel.get(req.params.id);
-        res.send(user);
-
+    .get('/wall/:handle', (req, res, next) => {
+        postModel.getWall(req.params.handle)
+            .then(posts => res.json({ success: true, errors: [], data: posts }))
+            .catch(next);
     })
-    .post('/', (req, res) => {
-        const user = userModel.create(req.body);
-        res.status(CREATED_STATUS).send(user);
-    })
-    .delete('/:id', (req, res) => {
-
-        const user = userModel.remove(req.params.id);
-
-        res.send({ success: true, errors: [], data: user });
+    .get('/:id', (req, res, next) => {
+        postModel.get(req.params.id)
+            .then(post => res.json({ success: true, errors: [], data: post }))
+            .catch(next);
 
     })
-    .patch('/:id', (req, res) => {
+    .post('/', (req, res, next) => {
+        postModel.create(req.body)
+            .then(post => res.status(CREATED_STATUS).json({ success: true, errors: [], data: post }))
+            .catch(next);
+    })
+    .delete('/:id', (req, res, next) => {
+        postModel.remove(req.params.id)
+            .then(post => res.json({ success: true, errors: [], data: post }))
+            .catch(next);
 
-        const user = userModel.update(req.params.id, req.body );
-
-        res.send({ success: true, errors: [], data: user });
-
+    })
+    .patch('/:id', (req, res, next) => {
+        postModel.update(req.params.id, req.body)
+            .then(post => res.json({ success: true, errors: [], data: post }))
+            .catch(next);
+    })
+    .post('/seed', (req, res, next) => {
+        postModel.seed()
+            .then(post => res.status(CREATED_STATUS).json({ success: true, errors: [], data: post }))
+            .catch(next);
     })
 
 

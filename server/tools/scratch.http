@@ -2,7 +2,7 @@ http://localhost:3001
 
 ###
 GET http://localhost:3001/api/users/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1NDd9.snZEHgy0vMtqifYQyHavTGWLeMpTjoRbfAE1V1Y0ido
+Authorization: bearer {{ login.response.body.data.token }}
 
 ###
 GET http://localhost:3001/api/users/625359480694a2e572214279
@@ -13,7 +13,7 @@ GET http://localhost:3001/api/users/handle/vp
 ###
 
 DELETE  http://localhost:3001/api/users/625359480694a2e572214278
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1NDd9.snZEHgy0vMtqifYQyHavTGWLeMpTjoRbfAE1V1Y0ido
+Authorization: bearer  {{ login.response.body.data.token }}
 
 ###
 POST http://localhost:3001/api/users
@@ -38,7 +38,9 @@ Content-Type: application/json
   "email": "save@ukraine.com"
 }
 
+
 ###
+# @name login
 POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
@@ -51,7 +53,10 @@ Content-Type: application/json
 POST http://localhost:3001/api/users/seed
 
 ###
-https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=9783c8f2be7a1d806aff6b1d9b738ea6
+https://api.openweathermap.org/data/2.5/weather?q=New York&appid={{$dotenv OPENWEATHER_KEY}}
 
 ###
 https://api.coinbase.com/v2/exchange-rates
+
+###
+https://maps.googleapis.com/maps/api/place/textsearch/json?query=University&key={{$dotenv GOOGLE_API_KEY_1}}
